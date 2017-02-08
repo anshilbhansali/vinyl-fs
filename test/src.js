@@ -348,6 +348,19 @@ describe('.src()', function() {
     ], done);
   });
 
+  // TODO: rename this test and commit to repo
+  it('use it twice', function(done) {
+    function assert(files) {
+      expect(files.length).toEqual(2);
+    }
+
+    pipe([
+      vfs.src(inputPath),
+      vfs.src(inputPath, { passthrough: true }),
+      concat(assert),
+    ], done);
+  });
+
   it('does not pass options.read on to through2', function(done) {
     // Reference: https://github.com/gulpjs/vinyl-fs/issues/153
     var read = expect.createSpy().andReturn(false);
